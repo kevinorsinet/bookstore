@@ -25,7 +25,7 @@
 
 	<div class="form-group mb-3">
 		<button type="submit" class="btn btn-primary">Ajouter</button>
-		<a href="/">Retour</a>
+
 	</div>
 </form>
 
