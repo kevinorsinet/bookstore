@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use app\Models\Review;
+use App\Models\Review;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
 class BookController extends Controller
 
@@ -17,7 +18,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        // echo "<pre>";
+        // print_r($user->password);
+        // echo "</pre>";
+        // die();
         $booksList = Book::all();
         return view('books.index', compact('booksList'));
     }
@@ -74,15 +79,28 @@ class BookController extends Controller
     public function show(Book $book)
     {
 
-        // $booksList = DB::table("books")
+        // $reviewsList = DB::table("books")
         // ->join("reviews", "books.id","=", "reviews.book_id")
         // ->join("readers", "reviews.reader_id","=", "reader.id")
         // ->select("readers.name as readerName", "reviews.comment")
         // ->get();
+        
+        // var_dump($book->id);
+        // die();
+
+        $reviewsList = DB::table("reviews")
+        ->join("books", "books.id","=", "reviews.book_id")
+        ->join("users", "reviews.user_id","=", "users.id")
+        ->where('books.id', '=', $book->id)
+        ->select("users.name as userName","comment", "rating")
+        ->get();
+
+
         // $reviews = $book->reviews;
         // var_dump($reviews);
         // die();
-        return view('books.show', compact(['book']));
+        
+        return view('books.show', compact(['book', 'reviewsList']));
     }
 
     /**

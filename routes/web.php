@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('books', BookController::class);
+Route::resource('books', BookController::class)->middleware(['auth']);
+Route::resource('reviews', ReviewController::class)->middleware(['auth']);
 Route::resource('authors', AuthorController::class);
 require __DIR__.'/auth.php';

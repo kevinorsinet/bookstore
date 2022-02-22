@@ -17,10 +17,10 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->text('comment');
             $table->integer('rating');
-            $table->unsignedBigInteger('reader_id');
-            $table->foreign('reader_id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
                   ->references('id')
-                  ->on('readers')
+                  ->on('users')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
             $table->unsignedBigInteger('book_id');

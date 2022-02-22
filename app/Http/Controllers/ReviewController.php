@@ -36,6 +36,17 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $input['user_id'] = auth()->user()->id;
+        $bookId = $request->book_id;
+        // var_dump($input['reader_id']);
+        // die();
+        // echo "<pre>";
+        // var_dump($input);
+        // echo "</pre>";
+    
+        Review::create($input);
+        return redirect()->route('books.show', $bookId)->with('success','Review created successfully.');
     }
 
     /**

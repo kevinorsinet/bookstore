@@ -1,4 +1,5 @@
 @extends('layout')
+@include('layouts.navigation')
 @section('content')
 		@if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -20,6 +21,7 @@
           <img class="card-img-top p-3" src="images/{{$item->image}}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{$item->name}}</h5>
+            <p>{{$item->price}} €</p>
             <a class="btn btn-primary" href="{{route('books.show', $item->id)}}" role="button">Afficher détails</a>
             {{-- <p>{{$item->category->name}}</p> --}}
             {{-- <a href="{{route('posts.edit', $item->id)}}">Editer</a> --}}
@@ -41,3 +43,4 @@
  
 
 @endsection
+
